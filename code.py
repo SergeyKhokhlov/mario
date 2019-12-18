@@ -3,7 +3,7 @@ import os
 import sys
 
 pygame.init()
-size = width, height = 700, 650
+size = width, height = 400, 400
 screen = pygame.display.set_mode(size)
 
 
@@ -49,6 +49,11 @@ def start_screen():
                   'Если в правилах несколько строк',
                   'приходится выводить их построчно']
     font = pygame.font.Font(None, 30)
+    # background_color = load_image('fon.jpg')
+    # screen.blit(background_color, (0, 0))
+    fon = pygame.transform.scale(load_image('fon.jpg'), (400, 400))
+    screen.blit(fon, (0, 0))
+    # background_color.scale(20, 20)
     text_coord = 50
     for line in intro_text:
         string_rendered = font.render(line, 1, pygame.Color('black'))
@@ -104,14 +109,12 @@ class Camera:
 
 
 player = None
-
+start_screen()
 all_sprites = pygame.sprite.Group()
 tiles_group = pygame.sprite.Group()
 player_group = pygame.sprite.Group()
 player, level_x, level_y = generate_level(load_level('level1.txt'))
 camera = Camera()
-background_color = load_image('fon.jpg')
-screen.blit(background_color, (0, 0))
 running = True
 while running:
     for event in pygame.event.get():
